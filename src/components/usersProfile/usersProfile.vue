@@ -5,9 +5,15 @@
       <b-navbar class="header__menu">
         <div class="header__menu__title" href="#">Мой профиль</div>
         <b-navbar-nav class="header__menu__options">
-          <b-nav-item class="header__menu__item" href="#"><img src="@/assets/search.svg" alt="search" /></b-nav-item>
-          <b-nav-item class="header__menu__item" href="#"><img src="@/assets/bell.svg" alt="bell" /></b-nav-item>
-          <b-nav-item class="header__menu__item" href="#"><img src="@/assets/eye.svg" alt="eye" /></b-nav-item>
+          <b-nav-item class="header__menu__item" href="#">
+            <img src="@/assets/search.svg" alt="search" />
+          </b-nav-item>
+          <b-nav-item class="header__menu__item" href="#">
+            <img src="@/assets/bell.svg" alt="bell" />
+          </b-nav-item>
+          <b-nav-item class="header__menu__item" href="#">
+            <img src="@/assets/eye.svg" alt="eye" />
+          </b-nav-item>
           <b-nav-item-dropdown class="header__menu__user" text="User" right>
             <b-dropdown-item href="#">Account</b-dropdown-item>
             <b-dropdown-item href="#">Settings</b-dropdown-item>
@@ -32,7 +38,13 @@
         <b-nav-item class="navigation__item">
           <img src="@/assets/book.svg" alt="heart" />Полезно знать
         </b-nav-item>
-          <button class="navigation__req-btn">Подать заявку</button>
+        <button class="navigation__req-btn">Подать заявку</button>
+        <a href="#" class="navigation__help">
+          <img src="@/assets/help.svg" class="navigation__help-img" alt="help" />Помощь
+        </a>
+        <div class="navigation__logo">
+          <img src="@/assets/appvelox.png" alt="appvelox" />
+        </div>
       </b-nav>
     </div>
     <div class="usersProfile__content">
@@ -44,9 +56,10 @@
 <style lang="scss">
 .header {
   width: 100%;
-  display: inherit;
+  display: flex;
   max-height: 3.4375rem;
   &__menu {
+    width: 100%;
     min-width: 73.5rem;
     background: #50caff;
     &__title {
@@ -57,15 +70,15 @@
     &__options {
       margin-left: auto;
     }
-    &__user{
-        margin-left: 2.75rem;
+    &__user {
+      margin-left: 2.75rem;
     }
-    &__item{
-        margin-left: 0.25rem;
+    &__item {
+      margin-left: 0.25rem;
     }
   }
   &__logo {
-    width: 11.875rem;
+    min-width: 11.875rem;
     display: flex;
     background: #003b72;
     color: #ffffff;
@@ -84,9 +97,11 @@
   flex-flow: row wrap;
   background: #fcfcfc;
   &__menu {
-    min-height: 48rem;
+    height: 100vh; //костыль
     width: 11.875rem;
     background: #003b72;
+  }
+  &__content {
   }
 }
 
@@ -129,9 +144,27 @@
     border: none;
     margin: 0 0 0.375rem 1.25rem;
     outline: none;
-    &:hover{
-        opacity: 0.8;
+    &:hover {
+      opacity: 0.8;
     }
+  }
+  &__help {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: normal;
+    font-size: 14px;
+    margin: 19.5625rem 0 0 1.25rem;
+    &:hover{
+      text-decoration: none;
+      color: #fcfcfc;
+      opacity: 0.8;
+    }
+    &-img{
+      margin-right: 0.875rem;
+    }
+  }
+  &__logo{
+        margin: 1rem 0 0 1.25rem;
   }
 }
 </style>

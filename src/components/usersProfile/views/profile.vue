@@ -9,8 +9,14 @@
           <div class="appointment__time">{{appoint.day}} {{appoint.date}} | {{appoint.time}}</div>
           <div class="appointment__place">{{appoint.place}}</div>
           <div class="appointment__doctor">
-            <div class="appointment__doctor__name">{{appoint.doctor.name}}</div>
-            <div class="appointment__doctor__prof">{{appoint.doctor.prof}}</div>
+            <div class="appointment__doctor__photo">
+              <img :src="require(`@/assets/doctors/${appoint.doctor.id}.png`)" alt="doctorPhoto" />
+            </div>
+            <div class="appointment__doctor__description">
+              <div class="appointment__doctor__name">{{appoint.doctor.name}}</div>
+              <div class="appointment__doctor__prof">{{appoint.doctor.prof}}</div>
+            </div>
+            <button class="appointment__doctor__cancel-btn">Отменить</button>
           </div>
         </div>
       </div>
@@ -33,6 +39,7 @@ export default {
           doctor: {
             name: "Малушко Т.Н.",
             prof: "Хирургия",
+            id: 1,
           },
         },
         {
@@ -44,6 +51,7 @@ export default {
           doctor: {
             name: "Харьков В.С.",
             prof: "Терапевтическое отделение",
+            id: 2,
           },
         },
         {
@@ -55,6 +63,7 @@ export default {
           doctor: {
             name: "Малушко Т.Н.",
             prof: "Хирургия",
+            id: 1,
           },
         },
         {
@@ -66,6 +75,7 @@ export default {
           doctor: {
             name: "Малушко Т.Н.",
             prof: "Хирургия",
+            id: 1,
           },
         },
         {
@@ -77,6 +87,7 @@ export default {
           doctor: {
             name: "Харьков В.С.",
             prof: "Терапевтическое отделение",
+            id: 2,
           },
         },
       ],
@@ -89,6 +100,7 @@ export default {
 .profile__nav {
   display: flex;
   height: 2.875rem;
+//   min-width: 1176px;
   align-items: center;
   &-title {
     display: flex;
@@ -99,7 +111,7 @@ export default {
 }
 .profile__appointments {
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: row nowrap;
   .appointment {
     margin: 0 0 0 1.25rem;
     &__content {
@@ -115,11 +127,20 @@ export default {
       font-size: 16px;
     }
     &__place {
-        width: 17.5rem;
+      width: 17.5rem;
       font-weight: 300;
       font-size: 14px;
     }
     &__doctor {
+      display: flex;
+      margin-top: 0.5625rem;
+      &__photo {
+        width: 3.75rem;
+        height: 3.75rem;
+      }
+      &__description {
+        margin: 0.75rem 0 0 0.6875rem;
+      }
       &__name {
         font-weight: 500;
         font-size: 14px;
@@ -129,6 +150,23 @@ export default {
         font-weight: normal;
         font-size: 14px;
         color: #ebe7ff;
+      }
+      &__cancel-btn {
+        position: absolute;
+        margin: 1.25rem 0 0 21.125rem;
+        width: 6.125rem;
+        height: 2.5rem;
+        background: #7761ff;
+        color: #ffffff;
+        font-weight: 500;
+        font-size: 14px;
+        text-align: center;
+        border-radius: 5px;
+        border: none;
+        outline: none;
+        &:hover {
+          opacity: 0.8;
+        }
       }
     }
   }
