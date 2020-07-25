@@ -21,6 +21,7 @@
         </b-navbar-nav>
       </b-navbar>
     </div>
+    <!-- меню приложения -->
     <div class="usersProfile__menu">
       <b-nav vertical class="navigation">
         <b-nav-item class="navigation__item active">
@@ -54,6 +55,17 @@
 </template>
 
 <style lang="scss">
+.usersProfile > * {
+  flex: 1 100%;
+}
+@media all and (min-width: 600px) {
+  .usersProfile__menu { flex: 1 0 0; }
+}
+
+@media all and (min-width: 800px) {
+  .usersProfile__content { flex: 3 0px; order: 2;}
+  .usersProfile__menu { order: 1; } 
+}
 .header {
   width: 100%;
   display: flex;
@@ -98,6 +110,7 @@
   background: #fcfcfc;
   &__menu {
     height: 100vh; //костыль
+    max-width: 11.875rem;
     width: 11.875rem;
     background: #003b72;
   }
