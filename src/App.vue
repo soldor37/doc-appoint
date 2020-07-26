@@ -11,13 +11,7 @@ html{
   /* width: 1366px;
   height: 768px; */
 }
-hr{
-  margin-top: 0;
-  width: 20.9375rem;
-  color: #50CAFF;
-  background-color: #50CAFF;
-  border-top: 2px solid #50CAFF; 
-}
+
 #app{
   position: relative;
   top: 0;

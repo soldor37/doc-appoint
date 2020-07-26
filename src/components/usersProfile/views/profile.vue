@@ -36,7 +36,7 @@
           </div>
           <div class="option__descript">
             <p class="option__title">Информация о пациенте</p>
-            <hr />
+            <div class="separator"></div>
             <ul class="option__text">
               <li>Ваши личные данные</li>
               <li>Рекомендации врачей</li>
@@ -46,31 +46,31 @@
         </div>
         <div class="option results">
           <div class="option__logo">
-            <img src="@/assets/info.svg" alt="info" />
+            <img src="@/assets/analysis.svg" alt="analysis" />
           </div>
           <div class="option__descript">
             <p class="option__title">Результаты анализов</p>
-            <hr />
+            <div class="separator"></div>
             <p class="option__text">Вы можете узнать здесь результаты своих анализов</p>
           </div>
         </div>
         <div class="option addInfo">
           <div class="option__logo">
-            <img src="@/assets/info.svg" alt="info" />
+            <img src="@/assets/addInfo.svg" alt="addInfo" />
           </div>
           <div class="option__descript">
             <p class="option__title">Добавить информацию</p>
-            <hr />
+            <div class="separator"></div>
             <p class="option__text">Добавляйте в свою электронную медицинскую карту новые данные</p>
           </div>
         </div>
         <div class="option hist">
           <div class="option__logo">
-            <img src="@/assets/info.svg" alt="info" />
+            <img src="@/assets/hist.svg" alt="hist" />
           </div>
           <div class="option__descript">
             <p class="option__title">История приемов</p>
-            <hr />
+            <div class="separator"></div>
             <p class="option__text">Вся информация о полученных услугах за все время хранится здесь</p>
           </div>
         </div>
@@ -247,6 +247,19 @@ export default {
   }
 }
 .profile__info {
+  width: 80%;
+  //заменяет стандартные точки у списков на модифицируемые
+  ul {
+    list-style: none;
+  }
+  ul li::before {
+    content: "\2022";
+    color: black;
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+  }
   &__title {
     color: #000000;
     font-weight: normal;
@@ -274,22 +287,47 @@ export default {
       }
       &__descript {
         width: 25.4375rem;
+        .separator {
+          margin: 0.125rem 0 0 2.375rem;
+          width: 20.9375rem;
+          border-top: 2px solid #ebe7ff;
+        }
       }
       &__title {
         font-weight: normal;
         font-size: 28px;
-        margin: 1rem 0 0 2.3125rem;
+        margin: 2rem 0 0 2.3125rem;
       }
       &__text {
+        max-width: 20.25rem;
+        margin-top: 1.4rem;
+        margin-left: 38px;
+      }
+      &:hover {
+        cursor: pointer;
+        .separator {
+          border-top: 2px solid #50caff;
+        }
+        ul li::before {
+          color: #50caff;
+        }
+        .option__logo {
+          background: #50caff;
+        }
+      }
+    }
+    .patient {
+      .option__title {
+        margin: 1rem 0 0 2.3125rem;
+      }
+      .option__text {
+        margin-top: 1rem;
+        margin-left: 0.8125rem;
+        li {
+          margin-bottom: 0.4375rem;
+        }
       }
     }
   }
-}
-hr {
-  margin-top: 0;
-  width: 20.9375rem;
-  color: #50caff;
-  background-color: #50caff;
-  border-top: 2px solid #50caff; //не робит
 }
 </style>

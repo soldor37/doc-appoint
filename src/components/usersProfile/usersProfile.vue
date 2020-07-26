@@ -14,7 +14,10 @@
           <b-nav-item class="header__menu__item" href="#">
             <img src="@/assets/eye.svg" alt="eye" />
           </b-nav-item>
-          <b-nav-item-dropdown class="header__menu__user" text="User" right>
+          <div class="user__photo">
+            <img class="user__photo__img" src="@/assets/user.png" alt="user" />
+          </div>
+          <b-nav-item-dropdown class="header__menu__user" right>
             <b-dropdown-item href="#">Account</b-dropdown-item>
             <b-dropdown-item href="#">Settings</b-dropdown-item>
           </b-nav-item-dropdown>
@@ -59,12 +62,30 @@
   flex: 1 100%;
 }
 @media all and (min-width: 600px) {
-  .usersProfile__menu { flex: 1 0 0; }
+  .usersProfile__menu {
+    flex: 1 0 0;
+  }
 }
 
 @media all and (min-width: 800px) {
-  .usersProfile__content { flex: 3 0px; order: 2;}
-  .usersProfile__menu { order: 1; } 
+  .usersProfile__content {
+    flex: 3 0px;
+    order: 2;
+  }
+  .usersProfile__menu {
+    order: 1;
+  }
+}
+//Скрывает стрелку дропдауна от бутстрапа
+#__BVID__9__BV_toggle_ {
+  outline: none;
+  color: transparent;
+  position: relative;
+  margin: 0.9375rem 1.1875rem 0 0.6875rem;
+  right: 0;
+  width: 1rem;
+  height: 1rem;
+  background: no-repeat url("../../assets/drop.svg");
 }
 .header {
   width: 100%;
@@ -88,8 +109,24 @@
     &__item {
       margin-left: 0.25rem;
     }
+    .user__photo {
+      position: relative;
+      width: 3.0625rem;
+      height: 3.0625rem;
+      margin-left: 0.625rem;
+      margin-right: -3rem;
+      border: 1px solid white;
+      border-radius: 25px;
+      &__img {
+        border-radius: 25px;
+        margin: 0.0625rem 0 0 0.0625rem;
+        width: 2.8125rem;
+        height: 2.8125rem;
+      }
+    }
   }
   &__logo {
+    font-size: 14px;
     min-width: 11.875rem;
     display: flex;
     background: #003b72;
@@ -167,17 +204,17 @@
     font-weight: normal;
     font-size: 14px;
     margin: 19.5625rem 0 0 1.25rem;
-    &:hover{
+    &:hover {
       text-decoration: none;
       color: #fcfcfc;
       opacity: 0.8;
     }
-    &-img{
+    &-img {
       margin-right: 0.875rem;
     }
   }
-  &__logo{
-        margin: 1rem 0 0 1.25rem;
+  &__logo {
+    margin: 1rem 0 0 1.25rem;
   }
 }
 </style>
