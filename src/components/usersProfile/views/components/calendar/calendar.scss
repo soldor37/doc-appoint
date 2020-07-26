@@ -27,10 +27,11 @@ $outline-color: #757575 !default;
   box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
-  font-family: 'Rubik';
+  font-family: "Rubik";
   font-style: normal;
   font-weight: normal;
   font-size: 20px;
+  outline: none;
   button {
     background: none;
     border: 0;
@@ -44,8 +45,9 @@ $outline-color: #757575 !default;
 
   *:focus {
     // sass-lint:disable-line no-universal-selectors
-    outline: $outline-size dotted $outline-color;
-    outline-offset: $outline-size;
+    // outline: $outline-size dotted $outline-color;
+    // outline-offset: $outline-size;
+    outline: none;
   }
 
   // Header
@@ -94,15 +96,15 @@ $outline-color: #757575 !default;
 
   &__previous {
     order: -1;
-    
+
     &::after {
       @include arrow("left");
     }
   }
 
   &__month {
-    margin-right: 2.375rem;
-    margin-left: 2.375rem;
+    margin-right: 1.375rem;
+    margin-left: 1.375rem;
   }
 
   // Calendar
@@ -113,7 +115,8 @@ $outline-color: #757575 !default;
     grid-template-rows: 2em auto;
     width: 100%;
     height: 100%;
-    max-height: 26.5rem;  }
+    max-height: 26.5rem;
+  }
 
   &__head {
     background: #ebe7ff;
@@ -126,11 +129,10 @@ $outline-color: #757575 !default;
     background: #ebe7ff;
     border: none;
     display: grid;
-    grid-auto-rows: minmax(3em, 10vh);
     grid-column: span 7;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-    padding: 0 0.5625rem;
+    padding: 0 0.5625rem 4.6rem;
   }
 
   &__weekdays {
@@ -162,7 +164,7 @@ $outline-color: #757575 !default;
     }
 
     &--active {
-      background: mix($white, $yellow, 50%);
+      background: mix(#50caff, white, 30%);
       border: none;
     }
   }
@@ -177,7 +179,7 @@ $outline-color: #757575 !default;
     width: 100%;
 
     &:focus {
-      background-color: rgba($red, 0.5);
+      outline: 1.5px solid #50caff;
     }
 
     &:hover {

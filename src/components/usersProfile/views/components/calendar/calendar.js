@@ -64,8 +64,8 @@ export default {
         const thisMonth = new Date(Date.parse(`${month} 1, 2017`));
 
         return {
-          short: thisMonth.toLocaleDateString(this.locale, { month: 'short' }),
-          long: thisMonth.toLocaleDateString(this.locale, { month: 'long' }),
+          short: thisMonth.toLocaleDateString('ru-RU', { month: 'short' }),
+          long: thisMonth.toLocaleDateString('ru-RU', { month: 'long' }),
         };
       });
     },
@@ -75,12 +75,12 @@ export default {
       const found = [];
       const sorted = [];
       const now = new Date(Date.now());
-      const day = now.getDay();
+      let day = now.getDay();
       let next = 0;
 
       do {
-        const short = now.toLocaleDateString(this.locale, { weekday: 'short' });
-        const long = now.toLocaleDateString(this.locale, { weekday: 'long' });
+        const short = now.toLocaleDateString('ru-RU', { weekday: 'short' });
+        const long = now.toLocaleDateString('ru-RU', { weekday: 'long' });
 
         days.push({
           short,
@@ -89,18 +89,19 @@ export default {
         found.push(long);
 
         now.setHours(now.getHours() + 24);
-        next = now.toLocaleDateString(this.locale, { weekday: 'long' });
+        next = now.toLocaleDateString('ru-RU', { weekday: 'long' });
       } while (found.indexOf(next) < 0);
 
       const start = days.length - 1;
       const end = days.length - 1 - day;
-
+      
       for (let i = start; i > end; i -= 1) {
         sorted.push(days[i]);
         days.pop();
       }
-
-      const output = sorted.reverse().concat(days);
+      let output = sorted.reverse().concat(days);
+      // let tmp = output.shift(); // делает начало недели с понедельника
+      // output.push(tmp)
       return output;
     },
     today() {
@@ -119,7 +120,7 @@ export default {
       current.parsed = new Date(Date.parse(`${months[current.month]} 1, ${current.year}`));
       current.start = new Date(Date.parse(current.parsed)).getDay();
       current.end = new Date(Date.parse(`${months[current.month]} ${current.days}, ${current.year}`)).getDay();
-      current.string = current.parsed.toLocaleDateString(this.locale, { month: 'long', year: 'numeric' });
+      current.string = current.parsed.toLocaleDateString('ru-RU', { month: 'long', year: 'numeric' });
 
       const next = {
         month: current.month + 1 > 11 ? 0 : current.month + 1,
@@ -127,7 +128,7 @@ export default {
       };
       next.days = 32 - new Date(next.year, next.month, 32).getDate();
       next.parsed = new Date(Date.parse(`${months[next.month]} 1, ${next.year}`));
-      next.string = next.parsed.toLocaleDateString(this.locale, { month: 'long', year: 'numeric' });
+      next.string = next.parsed.toLocaleDateString('ru-RU', { month: 'long', year: 'numeric' });
 
       const previous = {
         month: current.month - 1 < 0 ? 11 : current.month - 1,
@@ -135,14 +136,13 @@ export default {
       };
       previous.days = 32 - new Date(previous.year, previous.month, 32).getDate();
       previous.parsed = new Date(Date.parse(`${months[previous.month]} 1, ${previous.year}`));
-      previous.string = previous.parsed.toLocaleDateString(this.locale, { month: 'long', year: 'numeric' });
+      previous.string = previous.parsed.toLocaleDateString('ru-RU', { month: 'long', year: 'numeric' });
 
       const days = [];
       const leading = 6 - (6 - current.start);
       const trailing = 7 - current.end;
       const start = current.days - (7 - current.start);
       const weeks = Math.ceil(start / 7);
-
       let offset = 0;
 
       current.trailing = trailing - 1;
@@ -156,7 +156,7 @@ export default {
       for (let i = 0; i < 7; i += 1) {
         if (i < leading) {
           const day = (previous.days - (current.start - 1)) + i;
-          const dayString = day.toLocaleString(this.locale);
+          const dayString = day.toLocaleString('ru-RU');
 
           days[0].push({
             month: previous.month,
@@ -172,7 +172,7 @@ export default {
           const isToday = this.isToday({ day, month: current.month, year: current.year });
           const focusable = this.isFocusable({ day, month: current.month, year: current.year });
           const dateString = this.getLocaleDate(day, current.month, current.year);
-          const dayString = day.toLocaleString(this.locale);
+          const dayString = day.toLocaleString('ru-RU');
 
           days[0].push({
             month: current.month,
@@ -196,7 +196,7 @@ export default {
         const isToday = this.isToday({ day, month: current.month, year: current.year });
         const focusable = this.isFocusable({ day, month: current.month, year: current.year });
         const dateString = this.getLocaleDate(day, current.month, current.year);
-        const dayString = day.toLocaleString(this.locale);
+        const dayString = day.toLocaleString('ru-RU');
 
         days[week].push({
           month: current.month,
@@ -215,7 +215,7 @@ export default {
 
       // Fill final week
       for (let i = 1; i < trailing; i += 1) {
-        const dayString = i.toLocaleString(this.locale);
+        const dayString = i.toLocaleString('ru-RU');
         days[week].push({
           month: next.month,
           year: next.year,
@@ -267,14 +267,19 @@ export default {
 
       e.preventDefault();
 
-      if (target.classList.contains('calendar__date')) {
-        target = target.parentNode;
-      }
+      // if (target.classList.contains('calendar__date')) {
+      //   target = target.parentNode;
+      // }
       // Firefox/Safari need to be coerced into focusing the target element.
       target.focus();
-      // https://sebastiandedeyne.com/posts/2017/using-registered-event-listeners-as-conditionals-in-vue
+      
+      target = {
+        'day' : target.dataset.day,
+        'month' : target.dataset.month,
+        'year' : target.dataset.year,
+      }
       this.$emit('dateSelected', target);
-
+      
       e.preventDefault();
     },
     isFocusable(current) {
@@ -350,7 +355,7 @@ export default {
     },
     getLocaleDate(day, month, year) {
       // Move this in to computed/calendar view
-      return new Date(year, month, day).toLocaleDateString(this.locale, {
+      return new Date(year, month, day).toLocaleDateString('ru-RU', {
         weekday: 'long',
         month: 'long',
         day: 'numeric',
@@ -429,11 +434,8 @@ export default {
     },
   },
   data() {
-    // Going to want to push URL for deep linking
-    // Going to want current to be an object maybe? Month/Year
-    // Today may need to be different data
     return {
-      current: this.getCurrent(), // Dunno what to do with you
+      current: this.getCurrent(), 
       tab: false,
       tableID: this._uid, // eslint-disable-line no-underscore-dangle
     };

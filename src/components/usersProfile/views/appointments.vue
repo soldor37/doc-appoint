@@ -24,7 +24,7 @@
         </div>
       </div>
       <!-- Календарь -->
-      <Calendar></Calendar>
+      <Calendar v-bind:selectedDate="selectedDate" v-on:dateSelected="selectedDate = $event"></Calendar>
     </div>
   </div>
 </template>
@@ -39,6 +39,7 @@ export default {
   },
   data() {
     return {
+    selectedDate: {},
       appointments: [
         {
           day: "Понедельник",
