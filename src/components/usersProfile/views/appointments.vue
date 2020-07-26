@@ -25,6 +25,7 @@
   </div>
 </template>
 
+
 <script>
 export default {
   name: "appointments",
@@ -130,13 +131,13 @@ export default {
 
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: #003B72;
+    background: #003b72;
     border-radius: 5px;
   }
 
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba($color: #003B72, $alpha: 0.8);
+    background: rgba($color: #003b72, $alpha: 0.8);
   }
 }
 </style>
