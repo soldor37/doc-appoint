@@ -4,23 +4,22 @@ $yellow: #ff0 !default;
 $red: #f00 !default;
 $gray: #888 !default;
 $white: #fff !default;
-$half-pixel: (.5px / 16px) * 1em !default;
+$half-pixel: (0.5px / 16px) * 1em !default;
 $outline-size: 2px !default;
 $outline-color: #757575 !default;
 
 @mixin arrow($dir) {
-  $arrow: '<';
-  $padding: 'right';
+  $arrow: "<";
+  $padding: "right";
 
-  @if $dir == 'right' {
-    $arrow: '>';
-    $padding: 'left';
+  @if $dir == "right" {
+    $arrow: ">";
+    $padding: "left";
   }
-  color: $black;
+  color: $white;
   content: $arrow;
   display: block;
-  font-weight: bolder;
-  padding-#{$padding}: .25em;
+  padding-#{$padding}: 0.25em;
   speak: none;
 }
 
@@ -28,18 +27,23 @@ $outline-color: #757575 !default;
   box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
-
+  font-family: 'Rubik';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
   button {
     background: none;
     border: 0;
     font-size: 1em;
   }
 
-  * { // sass-lint:disable-line no-universal-selectors
+  * {
+    // sass-lint:disable-line no-universal-selectors
     box-sizing: border-box;
   }
 
-  *:focus { // sass-lint:disable-line no-universal-selectors
+  *:focus {
+    // sass-lint:disable-line no-universal-selectors
     outline: $outline-size dotted $outline-color;
     outline-offset: $outline-size;
   }
@@ -47,16 +51,18 @@ $outline-color: #757575 !default;
   // Header
   &__header {
     align-items: center;
-    background: mix($white, $blue, 50%);
+    background: #7761ff;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     display: flex;
     flex-shrink: 0;
-    font-size: 1.5em;
+    font-size: 0.875rem;
     justify-content: center;
     order: -1;
-    padding-bottom: .5em;
-    padding-top: .5em;
+    height: 3.5625rem;
+    padding: 0;
     width: 100%;
-
+    color: white;
   }
 
   &__nav {
@@ -73,7 +79,6 @@ $outline-color: #757575 !default;
     align-items: center;
     display: flex;
     text-decoration: none;
-
     &:hover {
       cursor: pointer;
     }
@@ -83,21 +88,21 @@ $outline-color: #757575 !default;
     order: 1;
 
     &::before {
-      @include arrow('right');
+      @include arrow("right");
     }
   }
 
   &__previous {
     order: -1;
-
+    
     &::after {
-      @include arrow('left');
+      @include arrow("left");
     }
   }
 
   &__month {
-    margin-left: .25em;
-    margin-right: .25em;
+    margin-right: 2.375rem;
+    margin-left: 2.375rem;
   }
 
   // Calendar
@@ -107,19 +112,25 @@ $outline-color: #757575 !default;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: 2em auto;
     width: 100%;
-  }
+    height: 100%;
+    max-height: 26.5rem;  }
 
   &__head {
-    background: mix($white, $blue, 50%);
+    background: #ebe7ff;
     grid-column: span 7;
     grid-row: span 1;
+    padding: 0.4375rem;
   }
 
   &__body {
-    border: $half-pixel * 2 solid $black;
+    background: #ebe7ff;
+    border: none;
     display: grid;
     grid-auto-rows: minmax(3em, 10vh);
     grid-column: span 7;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 0 0.5625rem;
   }
 
   &__weekdays {
@@ -130,6 +141,10 @@ $outline-color: #757575 !default;
   &__weekday {
     display: block;
     grid-column: span 1;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 300;
+    font-style: normal;
   }
 
   &__week {
@@ -138,17 +153,17 @@ $outline-color: #757575 !default;
   }
 
   &__day {
-    border: .03125em solid $black;
+    border: none;
     grid-column: span 1;
-
+    background: #ffffff;
     &--disabled {
-      background: mix($white, $gray, 50%);
-      border: $half-pixel solid $black;
+      background: #ebe7ff;
+      border: none;
     }
 
     &--active {
       background: mix($white, $yellow, 50%);
-      border: $half-pixel solid $black;
+      border: none;
     }
   }
 
@@ -157,13 +172,12 @@ $outline-color: #757575 !default;
     color: $black;
     display: flex;
     height: 100%;
-    justify-content: flex-end;
-    padding: .25em .5em;
+    padding: 0.25em 0.5em;
     text-decoration: none;
     width: 100%;
 
     &:focus {
-      background-color: rgba($red, .5);
+      background-color: rgba($red, 0.5);
     }
 
     &:hover {

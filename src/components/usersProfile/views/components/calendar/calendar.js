@@ -401,12 +401,12 @@ export default {
             current.month = months.indexOf(parsedMonth);
           }
 
-          this.$router.push({
-            params: {
-              year: current.year,
-              month: months[current.month].toLowerCase(),
-            },
-          });
+          // this.$router.push({
+          //   params: {
+          //     year: current.year,
+          //     month: months[current.month].toLowerCase(),
+          //   },
+          // });
         }
       }
 
@@ -418,14 +418,14 @@ export default {
         year,
       };
 
-      if (this.$router) {
-        this.$router.push({
-          params: {
-            year,
-            month: months[month].toLowerCase(),
-          },
-        });
-      }
+      // if (this.$router) {
+      //   this.$router.push({
+      //     params: {
+      //       year,
+      //       month: months[month].toLowerCase(),
+      //     },
+      //   });
+      // }
     },
   },
   data() {

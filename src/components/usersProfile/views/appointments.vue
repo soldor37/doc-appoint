@@ -3,32 +3,40 @@
     <div class="profile__nav">
       <div class="profile__nav-title">Записи на прием</div>
     </div>
-    <!-- карточки с информацией о записях к врачам -->
-    <div class="profile__appointments">
-      <div class="appointment" v-for="(appoint, index) in appointments" :key="index">
-        <div class="appointment__content">
-          <div class="appointment__time">{{appoint.day}} {{appoint.date}} | {{appoint.time}}</div>
-          <div class="appointment__place">{{appoint.place}}</div>
-          <div class="appointment__doctor">
-            <div class="appointment__doctor__photo">
-              <img :src="require(`@/assets/doctors/${appoint.doctor.id}.png`)" alt="doctorPhoto" />
+    <div class="usersProfile__content">
+      <!-- карточки с информацией о записях к врачам -->
+      <div class="profile__appointments">
+        <div class="appointment" v-for="(appoint, index) in appointments" :key="index">
+          <div class="appointment__content">
+            <div class="appointment__time">{{appoint.day}} {{appoint.date}} | {{appoint.time}}</div>
+            <div class="appointment__place">{{appoint.place}}</div>
+            <div class="appointment__doctor">
+              <div class="appointment__doctor__photo">
+                <img :src="require(`@/assets/doctors/${appoint.doctor.id}.png`)" alt="doctorPhoto" />
+              </div>
+              <div class="appointment__doctor__description">
+                <div class="appointment__doctor__name">{{appoint.doctor.name}}</div>
+                <div class="appointment__doctor__prof">{{appoint.doctor.prof}}</div>
+              </div>
+              <button class="appointment__doctor__cancel-btn">Отменить</button>
             </div>
-            <div class="appointment__doctor__description">
-              <div class="appointment__doctor__name">{{appoint.doctor.name}}</div>
-              <div class="appointment__doctor__prof">{{appoint.doctor.prof}}</div>
-            </div>
-            <button class="appointment__doctor__cancel-btn">Отменить</button>
           </div>
         </div>
       </div>
+      <!-- Календарь -->
+      <Calendar></Calendar>
     </div>
   </div>
 </template>
 
 
 <script>
+import Calendar from "./components/calendar/calendar.vue";
 export default {
   name: "appointments",
+  components: {
+    Calendar,
+  },
   data() {
     return {
       appointments: [
@@ -100,13 +108,22 @@ export default {
 
 <style lang="scss">
 .usersProfile__appointments {
+  .usersProfile__content {
+    display: flex;
+    flex-flow: row;
+    .calendar {
+      width: 35.8125rem;
+      height: 30.0625rem;
+      margin: 0.1875rem 0 0 2.55rem;
+    }
+  }
   .profile__appointments {
     flex-flow: column nowrap;
     max-height: 40.3125rem;
     max-width: 32.6575rem;
     overflow: auto;
     .appointment {
-      margin: 0 0 0.9375rem 1.25rem;
+      margin: 0 1.25rem 0.9375rem 1.25rem;
       &__doctor__description {
         width: 16.6875rem;
       }
