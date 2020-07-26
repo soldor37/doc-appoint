@@ -6,7 +6,7 @@
     <div class="usersProfile__content">
       <!-- карточки с информацией о записях к врачам -->
       <div class="profile__appointments">
-        <div class="appointment" v-for="(appoint, index) in appointments" :key="index">
+        <div class="appointment" v-for="(appoint, index) in tmpAppointments" :key="index">
           <div class="appointment__content">
             <div class="appointment__time">{{appoint.day}} {{appoint.date}} | {{appoint.time}}</div>
             <div class="appointment__place">{{appoint.place}}</div>
@@ -24,7 +24,7 @@
         </div>
       </div>
       <!-- Календарь -->
-      <Calendar v-bind:selectedDate="selectedDate" v-on:dateSelected="selectedDate = $event"></Calendar>
+      <Calendar v-bind:selectedDate="selectedDate" v-on:dateSelected="pickDate($event)"></Calendar>
     </div>
   </div>
 </template>
@@ -39,7 +39,8 @@ export default {
   },
   data() {
     return {
-    selectedDate: {},
+      selectedDate: {},
+      //основной массив с данными по записям, получение с сервера(типо)
       appointments: [
         {
           day: "Понедельник",
@@ -102,7 +103,36 @@ export default {
           },
         },
       ],
+      //временный массив с записями, по которому выводятся карточки 
+      tmpAppointments: [],
     };
+  },
+  created: function(){
+      this.tmpAppointments = this.appointments;
+  },
+  methods: {
+    pickDate(picked) {
+      let app = this;
+      let apsDates = [];
+      this.appointments.map((item) => {
+        apsDates.push({
+          index: this.appointments.indexOf(item),
+          day: item.date.split(".")[0],
+          month: item.date.split(".")[1].split("").pop(), //при попадании курсора на границу клетки или на число дня, дата не парсится
+          year: "20" + item.date.split(".")[2], //костыль!!! что-то придумать с годом
+        });
+      });
+      app.tmpAppointments = [];
+      apsDates.forEach((item) => {
+        if (
+          item.day == picked.day &&
+          item.month == +(picked.month)+1 &&
+          item.year == picked.year
+        ) {
+          app.tmpAppointments.push(app.appointments[item.index]);
+        }
+      });
+    },
   },
 };
 </script>
