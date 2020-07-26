@@ -81,7 +81,7 @@
   outline: none;
   color: transparent;
   position: relative;
-  margin: 0.9375rem 1.1875rem 0 0.6875rem;
+  margin: 0 1.55rem 0 0.6875rem;
   right: 0;
   width: 1rem;
   height: 1rem;
@@ -102,6 +102,7 @@
     }
     &__options {
       margin-left: auto;
+      align-items: center;
     }
     &__user {
       margin-left: 2.75rem;

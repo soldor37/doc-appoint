@@ -7,6 +7,7 @@
     <div class="profile__appointments">
       <div class="appointment" v-for="(appoint, index) in appointments" :key="index">
         <div class="appointment__content" v-if="index <= 1">
+         
           <div class="appointment__time">{{appoint.day}} {{appoint.date}} | {{appoint.time}}</div>
           <div class="appointment__place">{{appoint.place}}</div>
           <div class="appointment__doctor">
@@ -17,7 +18,7 @@
               <div class="appointment__doctor__name">{{appoint.doctor.name}}</div>
               <div class="appointment__doctor__prof">{{appoint.doctor.prof}}</div>
             </div>
-            <button class="appointment__doctor__cancel-btn">Отменить</button>
+             <button class="appointment__doctor__cancel-btn">Отменить</button>
           </div>
         </div>
       </div>
@@ -247,7 +248,7 @@ export default {
   }
 }
 .profile__info {
-  width: 80%;
+  max-width: 73.5rem;
   //заменяет стандартные точки у списков на модифицируемые
   ul {
     list-style: none;
