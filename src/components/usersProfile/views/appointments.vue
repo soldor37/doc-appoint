@@ -142,7 +142,7 @@ export default {
       //сравниваем выбранную дату с датами существующих записей
       apsDates.forEach((item) => {
         if (
-          item.day == picked.day &&
+          item.day.match(/[1-9][0-9]?/)[0] == picked.day &&
           item.month == +picked.month + 1 &&
           item.year == picked.year
         ) {
@@ -175,7 +175,6 @@ export default {
         tmpCount.push(tmp[item])
       }
       app.apsCount = tmpCount;
-      console.log(app.apsCount);
     },
     reloadAps() {
       this.tmpAppointments = this.appointments;
