@@ -163,7 +163,7 @@ export default {
             count: 1,
             day: item.date.split(".")[0],
             month: item.date.split(".")[1].split("").pop(),
-            year: '20' + item.date.split(".")[2],
+            year: "20" + item.date.split(".")[2],
           };
         } else {
           tmp[item.date].count += 1;
@@ -171,8 +171,8 @@ export default {
       });
       //убираем ключи у объектов
       let tmpCount = [];
-      for (let item in tmp){
-        tmpCount.push(tmp[item])
+      for (let item in tmp) {
+        tmpCount.push(tmp[item]);
       }
       app.apsCount = tmpCount;
     },
@@ -220,13 +220,15 @@ export default {
     .calendar {
       width: 35.8125rem;
       height: 30.0625rem;
-      margin: 0.1875rem 0 0 2.55rem;
+      // margin: 0.1875rem 0 0 2.55rem;
     }
   }
   .profile__appointments {
     flex-flow: column nowrap;
     max-height: 40.3125rem;
     max-width: 32.6575rem;
+    min-width: 32.6575rem;
+    margin-right: 2.55rem;
     overflow: auto;
     .appointment {
       margin: 0 1.25rem 0.9375rem 1.25rem;

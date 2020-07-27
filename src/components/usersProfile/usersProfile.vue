@@ -64,10 +64,11 @@
 @media all and (min-width: 600px) {
   .usersProfile__menu {
     flex: 1 0 0;
+    height: 100vh;
   }
 }
 
-@media all and (min-width: 800px) {
+@media all and (min-width: 300px) {
   .usersProfile__content {
     flex: 3 0px;
     order: 2;
@@ -142,17 +143,16 @@
 
 .usersProfile {
   width: 100%;
+  min-width: 85.375rem;
   position: relative;
   display: flex;
   flex-flow: row wrap;
   background: #fcfcfc;
   &__menu {
-    height: 100vh; //костыль
     max-width: 11.875rem;
     width: 11.875rem;
     background: #003b72;
   }
-  
 }
 
 .navigation {
