@@ -1,4 +1,4 @@
-# doc-appoint
+# [doc-appoint](https://soldor37.github.io/doc-appoint/#/appointments)
 
 ## Project setup
 ```
