@@ -1,7 +1,7 @@
 <template>
   <div class="usersProfile__appointments">
     <div class="profile__nav">
-      <router-link to="/usersProfile/profile">
+      <router-link to="/profile">
         <img src="@/assets/arrow_left.svg" alt="arrow_left" />
         <div class="profile__nav-title">Мои записи</div>
       </router-link>

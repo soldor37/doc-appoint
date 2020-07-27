@@ -27,7 +27,7 @@
     <!-- меню приложения -->
     <div class="usersProfile__menu">
       <b-nav vertical class="navigation">
-        <b-nav-item class="navigation__item active">
+        <b-nav-item to="/profile" class="navigation__item active">
           <img src="@/assets/heart.svg" alt="heart" /> Профиль
         </b-nav-item>
         <b-nav-item class="navigation__item">
