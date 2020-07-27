@@ -155,12 +155,29 @@ $outline-color: #757575 !default;
   }
 
   &__day {
+    position: relative;
     border: none;
     grid-column: span 1;
     background: #ffffff;
+    &__aps{
+      display: flex;
+      position: absolute;
+      width: 1.375rem;
+      height: 1.375rem;
+      color: white;
+      background: #50caff;
+      font-size: 14px;
+      border-radius: 11px;
+      justify-content: center;
+      align-items: center;
+      margin: 1.9375rem 0 0 2.9375rem;
+    }
     &--disabled {
       background: #ebe7ff;
       border: none;
+      .calendar__date{
+        color: rgba(0, 0, 0, 0.25);
+      }
     }
 
     &--active {
@@ -184,6 +201,7 @@ $outline-color: #757575 !default;
 
     &:hover {
       cursor: pointer;
+      outline: 1px solid #50caff;
     }
 
     // For cross-browser consistency disable the dotted-line that FireFox adds.

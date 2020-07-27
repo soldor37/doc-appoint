@@ -152,8 +152,7 @@
     width: 11.875rem;
     background: #003b72;
   }
-  &__content {
-  }
+  
 }
 
 .navigation {

@@ -27,6 +27,14 @@
             v-for="day in week"
             :key="day.string"
           >
+            <!-- показывает количество записей по дате -->
+            <div v-for="item in apsCount" :key="apsCount.indexOf(item)">
+              <div
+                class="calendar__day__aps"
+                v-if="item.day == day.day && item.month == +(day.month)+1 && item.year == day.year"
+              >{{item.count}}</div>
+            </div>
+
             <!-- Make only "active" or "1" focusable -->
             <button
               :tabindex="day.focusable ? 0 : -1"

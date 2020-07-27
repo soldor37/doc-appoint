@@ -16,6 +16,7 @@ const months = [
 export default {
   name: 'calendar',
   props: {
+    apsCount: Array,
     locale: {
       type: String,
       default: 'en-US',
@@ -438,6 +439,7 @@ export default {
       current: this.getCurrent(), 
       tab: false,
       tableID: this._uid, // eslint-disable-line no-underscore-dangle
+      // apsCount: 1,
     };
   },
 };

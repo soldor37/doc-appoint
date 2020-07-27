@@ -1,11 +1,15 @@
 <template>
   <div class="usersProfile__appointments">
     <div class="profile__nav">
-      <div class="profile__nav-title">Записи на прием</div>
+      <router-link to="/usersProfile/profile">
+        <img src="@/assets/arrow_left.svg" alt="arrow_left" />
+        <div class="profile__nav-title">Мои записи</div>
+      </router-link>
     </div>
     <div class="usersProfile__content">
       <!-- карточки с информацией о записях к врачам -->
       <div class="profile__appointments">
+        <div v-if="show" class="reload" @click="reloadAps()">Показать все записи</div>
         <div class="appointment" v-for="(appoint, index) in tmpAppointments" :key="index">
           <div class="appointment__content">
             <div class="appointment__time">{{appoint.day}} {{appoint.date}} | {{appoint.time}}</div>
@@ -24,7 +28,7 @@
         </div>
       </div>
       <!-- Календарь -->
-      <Calendar v-bind:selectedDate="selectedDate" v-on:dateSelected="pickDate($event)"></Calendar>
+      <Calendar v-bind:apsCount="apsCount" v-on:dateSelected="pickDate($event)"></Calendar>
     </div>
   </div>
 </template>
@@ -40,6 +44,7 @@ export default {
   data() {
     return {
       selectedDate: {},
+      apsCount: [],
       //основной массив с данными по записям, получение с сервера(типо)
       appointments: [
         {
@@ -103,17 +108,21 @@ export default {
           },
         },
       ],
-      //временный массив с записями, по которому выводятся карточки 
+      //временный массив с записями, по которому выводятся карточки
       tmpAppointments: [],
+      //для отображения/скрытия элементов
+      show: false,
     };
   },
-  created: function(){
-      this.tmpAppointments = this.appointments;
+  created: function () {
+    this.tmpAppointments = this.appointments;
+    this.getCount();
   },
   methods: {
     pickDate(picked) {
       let app = this;
       let apsDates = [];
+      //получаем объект в удобном виде
       this.appointments.map((item) => {
         apsDates.push({
           index: this.appointments.indexOf(item),
@@ -123,15 +132,42 @@ export default {
         });
       });
       app.tmpAppointments = [];
+      //сравниваем выбранную дату с датами существующих записей
       apsDates.forEach((item) => {
         if (
           item.day == picked.day &&
-          item.month == +(picked.month)+1 &&
+          item.month == +picked.month + 1 &&
           item.year == picked.year
         ) {
           app.tmpAppointments.push(app.appointments[item.index]);
         }
       });
+      //включаем кнопку "показать все записи"
+      app.show = true;
+    },
+    //создает объект, в котором подсчитаны записи в один день
+    getCount(){
+      let app = this;
+      let tmp = [];
+      this.appointments.forEach(item=>{
+        if(tmp[item.date] == undefined){
+          tmp[item.date] = {
+            count : 1,
+            day : item.date.split('.')[0],
+            month : item.date.split('.')[1].split("").pop(),
+            year : item.date.split('.')[2]
+          }
+        }else{
+          tmp[item.date].count += 1;
+        }
+      })
+      
+      app.apsCount = tmp;
+      console.log(app.apsCount)
+    },
+    reloadAps() {
+      this.tmpAppointments = this.appointments;
+      this.show = false;
     },
   },
 };
@@ -139,6 +175,34 @@ export default {
 
 <style lang="scss">
 .usersProfile__appointments {
+  display: block;
+  min-width: 35rem;
+  .reload {
+    font-weight: normal;
+    font-size: 14px;
+    text-decoration: underline;
+    color: #50caff;
+    margin: 0 0 0.9375rem 20.875rem;
+    cursor: pointer;
+    &:hover {
+      color: #003b72;
+    }
+  }
+  .profile__nav {
+    a {
+      display: flex;
+      color: black;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+    img {
+      margin-left: 2.5rem;
+    }
+    &-title {
+      margin-left: 0.875rem;
+    }
+  }
   .usersProfile__content {
     display: flex;
     flex-flow: row;
