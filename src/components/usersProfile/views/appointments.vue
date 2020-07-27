@@ -44,7 +44,14 @@ export default {
   data() {
     return {
       selectedDate: {},
-      apsCount: [],
+      apsCount: [
+        {
+          count: 1,
+          day: "01",
+          month: "01",
+          year: "20",
+        },
+      ],
       //основной массив с данными по записям, получение с сервера(типо)
       appointments: [
         {
@@ -146,24 +153,29 @@ export default {
       app.show = true;
     },
     //создает объект, в котором подсчитаны записи в один день
-    getCount(){
+    getCount() {
       let app = this;
-      let tmp = [];
-      this.appointments.forEach(item=>{
-        if(tmp[item.date] == undefined){
+      let tmp = {};
+      this.apsCount = [];
+      this.appointments.forEach((item) => {
+        if (tmp[item.date] == undefined) {
           tmp[item.date] = {
-            count : 1,
-            day : item.date.split('.')[0],
-            month : item.date.split('.')[1].split("").pop(),
-            year : item.date.split('.')[2]
-          }
-        }else{
+            count: 1,
+            day: item.date.split(".")[0],
+            month: item.date.split(".")[1].split("").pop(),
+            year: '20' + item.date.split(".")[2],
+          };
+        } else {
           tmp[item.date].count += 1;
         }
-      })
-      
-      app.apsCount = tmp;
-      console.log(app.apsCount)
+      });
+      //убираем ключи у объектов
+      let tmpCount = [];
+      for (let item in tmp){
+        tmpCount.push(tmp[item])
+      }
+      app.apsCount = tmpCount;
+      console.log(app.apsCount);
     },
     reloadAps() {
       this.tmpAppointments = this.appointments;

@@ -28,7 +28,7 @@
             :key="day.string"
           >
             <!-- показывает количество записей по дате -->
-            <div v-for="item in apsCount" :key="apsCount.indexOf(item)">
+            <div v-for="item in apsCount" v-bind:key="apsCount.indexOf(item)">
               <div
                 class="calendar__day__aps"
                 v-if="item.day == day.day && item.month == +(day.month)+1 && item.year == day.year"
