@@ -17,7 +17,7 @@
     "pug-plain-loader": "^1.0.0",
     "sass": "^1.26.10",
     "sass-loader": "^9.0.2",
-    "vue": "^2.6.11",
+    "vue": "^3.0.0",
     "vue-router": "^3.2.0"
   },
   "devDependencies": {
